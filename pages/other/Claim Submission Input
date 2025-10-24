@@ -1,0 +1,12 @@
+---
+title: Claim Submission Input
+---
+# {% $markdoc.frontmatter.title %} {% #JSON %}
+
+This describes the data structure used for submitting a pet insurance claim. This includes claim details, customer information, policy data, and invoice specifics required for processing.
+## Input Data
+This file represents the initial submission of a claim.
+**- __MetaData:__: Contains general infomation about the document.
+**- __Data__: Contains core information for the claim.
+
+
