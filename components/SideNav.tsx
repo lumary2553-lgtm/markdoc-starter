@@ -2,24 +2,83 @@ import React from 'react';
 import {useRouter} from 'next/router';
 import Link from 'next/link';
 
-const items = [
+type NavLink = {href: string; children: React.ReactNode};
+type NavSection = {title: string; links: NavLink[]};
+
+const items: NavSection[] = [
   {
-    title: 'Overview',
-    links: [{href: '/docs', children: 'Summary'}],
+    title: 'APIs',
+    links: [
+      {href: 'APIs/MGAClaimsAPI', children: 'MGA Claims API Documentation'},
+      {href: 'APIs/MGAClaimsPublicAPI', children: 'MGA Claims Public API'}, {href: 'APIs/MGAClaimsvNextAzureFunction', children: 'MGA Claims vNext Azure Function'},{href: 'APIs/MGAPracticesAPI', children: 'MGA Practices API'}, {href: 'APIs/MGACustomersMetadata', children: 'MGA Customers Metadata'}, {href: 'APIs/MGACustomersPII', children: 'MGA Customers PII'},
+    ],
   },
-  {
-    title: 'Contents',
-    links: [{href: '/docs', children: 'Sample 1'}],
-  },
+  {title: 'Contents', links: [{href: '/docs', children: 'Sample 1'}]},
   {
     title: 'Claim',
-    links: [{href: '/Claim/Submission/Input', children: 'Claim Submission Input'}, {href: '/Claim/Submission/Output', children: 'Claim Submission Output'}],
+    links: [
+      {href: '/Claim/Submission/Input', children: 'Claim Submission Input'},
+      {href: '/Claim/Submission/Output', children: 'Claim Submission Output'},
+    ],
   },
-    {
+  {
     title: 'Gates',
-    links: [{href: '/Gates', children: 'Canadian Gate Territory'}, {href: '/Gates', children: 'Diagnosis Gate'}, {href: '/Gates', children: 'Discounted Item Gate'}, {href: '/Gates', children: 'Market Channel Code Brand Gate'}, {href: '/Gates', children: 'Multi Pet Invoice Gate'}, {href: '/Gates', children: 'Species Gate'}, {href: '/Gates', children: 'State Gate'}, {href: '/Gates', children: 'Symptom Date Check Gate'}, {href: '/Gates', children: 'Vet Missing Gate'}, {href: '/Gates', children: 'Version Gate'},], 
+    links: [
+      {href: '/Gates/CanadianTerritory', children: 'Canadian Territory Gate'},
+      {href: '/Gates/Diagnosis', children: 'Diagnosis Gate'},
+      {href: '/Gates/DiscountedItem', children: 'Discounted Item Gate'},
+      {href: '/Gates/LineItem', children: 'Line Item Gate'},
+      {href: '/Gates/MarketChannel', children: 'Market Channel Code Brand Gate'},
+      {href: '/Gates/MultiPet', children: 'Multi Pet Invoice Gate'},
+      {href: '/Gates/Species', children: 'Species Gate'},
+      {href: '/Gates/State', children: 'State Gate'},
+      {href: '/Gates/Symptom', children: 'Symptom Date Check Gate'},
+      {href: '/Gates/VetMissing', children: 'Vet Missing Gate'},
+      {href: '/Gates/Version', children: 'Version Gate'},
+    ],
+  },
+  {
+    title: 'Post Processors',
+    links: [
+      {href: '/PostProcessors/CodeChoice', children: 'Code Choice Post Processor'},
+      {href: '/PostProcessors/Condition', children: 'Condition Post Processor'},
+      {href: '/PostProcessors/Quantity', children: 'Quantity Post Processor'},
+      {href: '/PostProcessors/Species', children: 'Species Post Processor'},
+      {href: '/PostProcessors/State', children: 'State Post Processor'},
+      {href: '/PostProcessors/AnalGland', children: 'Infected Anal Gland Treatment Processor'},
+      {href: '/PostProcessors/Merge', children: 'Merge Post Processor Configuration'},
+    ],
+  },
+  {
+    title: 'Auditors',
+    links: [
+      {href: '/Auditors/Accident', children: 'Accident Only Auditor'},
+      {href: '/Auditors/AmountCharged', children: 'Amount Charged Auditor'},
+      {href: '/Auditors/Customer', children: 'Customer Auditor'},
+      {href: '/Auditors/DuplicateInvoice', children: 'Duplicate Invoice Auditor'},
+      {href: '/Auditors/Estimate', children: 'Estimate Auditor'},
+      {href: '/Auditors/GPT', children: 'GPT Auditor'},
+      {href: '/Auditors/ImageHash', children: 'Image Hash Auditor'},
+      {href: '/Auditors/Inception', children: 'Inception Auditor'},
+      {href: '/Auditors/InvoiceTotal', children: 'Invoice Total Auditor'},
+      {href: '/Auditors/OpenAppeals', children: 'Open Appeals Auditor'},
+      {href: '/Auditors/PartnerCode', children: 'Partner Code Auditor'},
+      {href: '/Auditors/PetCoverage', children: 'Pet Coverage Annual Limit Auditor'},
+      {href: '/Auditors/SameDayClaim', children: 'Same Day Claim Auditor'},
+      {href: '/Auditors/Tax', children: 'Tax Auditor'},
+      {href: '/Auditors/Vet', children: 'Vet Auditor'},
+      {href: '/Auditors/WaitingPeriod', children: 'Waiting Period Auditor'},
+    ],
+  },
+  {
+    title: 'MGAOnboarding',
+    links: [{href: '/MGAOnboarding/InvoiceDataAPIDocumentation', children: 'Invoice Data API Documentation'}],
   },
 ];
+
+function normalize(href: string) {
+  return href.startsWith('/') ? href : `/${href}`;
+}
 
 export function SideNav() {
   const router = useRouter();
@@ -31,10 +90,12 @@ export function SideNav() {
           <span>{item.title}</span>
           <ul className="flex column">
             {item.links.map((link) => {
-              const active = router.pathname === link.href;
+              const href = normalize(link.href);
+              const active =
+                router.asPath === href || router.asPath.startsWith(href + '/');
               return (
-                <li key={link.href} className={active ? 'active' : ''}>
-                  <Link {...link} />
+                <li key={href} className={active ? 'active' : ''}>
+                  <Link href={href}>{link.children}</Link>
                 </li>
               );
             })}

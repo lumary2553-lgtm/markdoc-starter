@@ -6,7 +6,7 @@
     "start": "next start"
   },
   "dependencies": {
-    "@markdoc/markdoc": "^0.5.1",
+    "@markdoc/markdoc": "^0.5.4",
     "@markdoc/next.js": "^0.4.0",
     "next": "latest",
     "prismjs": "latest",
@@ -14,9 +14,14 @@
     "react-dom": "latest"
   },
   "devDependencies": {
+    "@tailwindcss/typography": "^0.5.19",
+    "@tailwindcss/postcss": "^4.1.15",
     "@types/node": "latest",
     "@types/react": "latest",
     "@types/react-dom": "latest",
+    "autoprefixer": "^10.4.21",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^4.1.15",
     "typescript": "latest"
   }
 }
