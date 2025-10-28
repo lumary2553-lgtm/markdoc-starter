@@ -20,7 +20,7 @@ A set of APIs to manage VNext Claims.
 ### `/api/health`
 
 #### GET
-Gets the service health status
+Get service health status
 
 **Tags**: `Monitoring`
 

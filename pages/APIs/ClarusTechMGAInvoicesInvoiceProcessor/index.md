@@ -1,4 +1,4 @@
-# OpenAPI: Caladan.FileDataExtractor (0.5.18)
+# OpenAPI: ClarusTech.MGAInvoices.InvoiceProcessor (0.3.1)
 
 ## Tags
 
@@ -8,7 +8,7 @@
 
 ## Paths
 
-### GET /api/health
+### GET /api/invoice-processor/health
 
   * **Summary:** Get service health status
   * **Operation ID:** `getHealthStatus`
@@ -40,6 +40,7 @@
           ]
         }
         ```
+  * **`401`**: `$ref: '#/components/responses/unauthorized'`
   * **`500`**: `$ref: '#/components/responses/internalServerError'`
   * **`503`**: `$ref: '#/components/responses/serviceUnavailable'`
 

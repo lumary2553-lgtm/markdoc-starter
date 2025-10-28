@@ -1,35 +1,11 @@
-Here's the YAML file converted to Markdown:
+# OpenAPI: Caladan.WebRequests (0.5.18)
 
-# Caladan.WebRequests
+## Tags
 
-**Version:** 0.5.18
-**OpenAPI:** 3.0.3
+* **Requests**: Manage web request subscriptions
+* **Monitoring**: Internal monitoring endpoints
 
-REST API service to manage web requests.
-
-**Contact:**
-
-  * **Name:** GlobalLogic
-  * **URL:** `https://globallogic.com`
-  * **Email:** `andrii.nikolenko@globallogic.com`
-
-**Servers:**
-
-  * `https://ocr-api-dev.clarustech.com`
-
------
-
-## API Tags
-
-### Requests
-
-A set of APIs for managing subscriptions to the requests.
-
-### Monitoring
-
-A set of internal APIs for monitoring the service. These APIs can be used by monitoring software to check if the service is healthy.
-
------
+---
 
 ## Paths
 
@@ -105,7 +81,7 @@ A set of internal APIs for monitoring the service. These APIs can be used by mon
 
 ### GET /api/web-requests/health
 
-  * **Summary:** Health check
+  * **Summary:** Get service health status
   * **Operation ID:** `healthCheck`
   * **Tags:** `Monitoring`
   * **Security:** `apiKey`

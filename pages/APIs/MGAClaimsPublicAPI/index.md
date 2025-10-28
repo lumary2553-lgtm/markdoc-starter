@@ -20,7 +20,7 @@ This API uses JWT Bearer token authentication. All protected endpoints require a
 ### `/api/v1/claims`
 
 #### GET
-Retrieves claims for a specific practice within a time range
+Get claims for a practice within a time range
 
 **Security**
 * `jwtToken`: [ ]

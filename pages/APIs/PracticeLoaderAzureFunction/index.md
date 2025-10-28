@@ -1,36 +1,19 @@
-Here's the YAML file converted to Markdown:
+# OpenAPI: ClarusTech.OnboardingTool.PracticeLoader (0.1.73)
 
-# ClarusTech.OnboardingTool.PracticeLoader
+## Tags
 
-**Version:** 0.1.73
-**OpenAPI:** 3.0.3
+* **Health**: Service health checks
+* **PracticeEmailSender**: Practice email notifications
+* **PracticeOnboarding**: Practice onboarding operations
+* **PracticeWatcher**: Practice watcher operations
 
------
-
-## API Tags
-
-### Health
-
-Fetch health status
-
-### PracticeEmailSender
-
-Endpoints to manage practice onboarding and email sending
-
-### PracticeOnboarding
-
-*(No description provided in the YAML)*
-
-### PracticeWatcher
-
-*(No description provided in the YAML)*
-
------
+---
 
 ## Paths
 
 ### GET /api/health
 
+  * **Summary:** Get service health status
   * **Tags:** `Health`
   * **Responses:**
       * **`200 OK`**: OK

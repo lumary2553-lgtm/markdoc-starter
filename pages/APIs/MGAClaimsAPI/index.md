@@ -12,7 +12,7 @@
 ### `/api/v1/claims`
 
 #### GET
-Retrieves claims for a specific practice within a time range
+Get claims for a practice within a time range
 
 **Security**
 * `jwtToken`: [ ]
@@ -58,7 +58,7 @@ Retrieves claims for a specific practice within a time range
 ---
 
 #### POST
-Creates new claims in the database
+Create new claims in the database
 
 **Security**
 * `jwtToken`: [ ]
@@ -82,7 +82,7 @@ Creates new claims in the database
 ---
 
 #### PUT
-Updates existing claims in the database
+Update existing claims in the database
 
 **Security**
 * `jwtToken`: [ ]

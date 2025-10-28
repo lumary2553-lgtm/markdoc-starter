@@ -1,143 +1,31 @@
-# OpenAPI: ClarusTech.OnboardingTool.Backend (0.1.73)
+# OpenAPI: CCH.MGAInvoices.WebHook (0.3.1)
 
 ## Tags
 
-* **Configuration**: Retrieve service configuration
 * **Monitoring**: Internal monitoring endpoints
-* **Practices**: Manage practices
-* **Users**: Manage users
+* **WebHooks**: Manage webhook subscriptions
 
 ---
 
 ## Paths
 
-### GET /api/v1/configuration/spa
+### POST /api/subscriptions/web-hooks
 
-  * **Summary:** Get Auth0 configuration for SPA
-  * **Description:** Get Auth0 configuration settings for the SPA
-  * **Tags:** `Configuration`
-
-**Responses:**
-
-  * **`200 OK`**: Auth0 configuration has been retrieved.
-      * **Content:** `application/json`
-      * **Schema:** `$ref: '#/components/schemas/authConfiguration'`
-  * **`500`**: `$ref: '#/components/responses/internalServerError'`
-  * **`503`**: `$ref: '#/components/responses/serviceUnavailable'`
-
-<br>
-
-### GET /api/v1/practices
-
-  * **Summary:** Retrieves a list of practices.
-  * **Tags:** `Practices`
-  * **Security:** `jwtToken`, `basicAuth`
-
-**Parameters:**
-
-  * `practiceId` (query, `string: uuid`, max-length: 50)
-  * `vetId` (query, `string`)
-  * `orderBy` (query, `$ref: '#/components/schemas/getPracticesOrderByType'`)
-  * `SortOrder` (query, `$ref: '#/components/schemas/sortOrderType'`)
-  * `pageNumber` (query, `integer: int32`, min: 1, default: 1)
-  * `pageSize` (query, `integer: int32`, min: 1, default: 20)
-
-**Responses:**
-
-  * **`200 OK`**: Practices have been obtained.
-      * **Content:** `application/json`
-      * **Schema:** `array` (of `$ref: '#/components/schemas/practice'`)
-  * **`400`**: `$ref: '#/components/responses/badRequest'`
-  * **`401`**: `$ref: '#/components/responses/unauthorized'`
-  * **`403`**: `$ref: '#/components/responses/forbidden'`
-  * **`500`**: `$ref: '#/components/responses/internalServerError'`
-  * **`503`**: `$ref: '#/components/responses/serviceUnavailable'`
-
-<br>
-
-### POST /api/v1/practices
-
-  * **Summary:** Onboard practice.
-  * **Tags:** `Practices`
-  * **Security:** `jwtToken`
-
-**Request Body:**
-
-  * **Content:** `application/json`
-  * **Schema:** `$ref: '#/components/schemas/practiceOnboardingParameters'`
-
-**Responses:**
-
-  * **`200 OK`**: Practice have been onboarded.
-      * **Content:** `application/json`
-      * **Schema:** `$ref: '#/components/schemas/onboardPracticeResponse'`
-  * **`400`**: `$ref: '#/components/responses/badRequest'`
-  * **`401`**: `$ref: '#/components/responses/unauthorized'`
-  * **`403`**: `$ref: '#/components/responses/forbidden'`
-  * **`500`**: `$ref: '#/components/responses/internalServerError'`
-  * **`503`**: `$ref: '#/components/responses/serviceUnavailable'`
-
-<br>
-
-### POST /api/v1/practices/publish
-
-  * **Summary:** Publish onboarded practice.
-  * **Tags:** `Practices`
-  * **Security:** `jwtToken`
-
-**Responses:**
-
-  * **`200 OK`**: Onboarded practice have been published.
-  * **`400`**: `$ref: '#/components/responses/badRequest'`
-  * **`401`**: `$ref: '#/components/responses/unauthorized'`
-  * **`403`**: `$ref: '#/components/responses/forbidden'`
-  * **`500`**: `$ref: '#/components/responses/internalServerError'`
-  * **`503`**: `$ref: '#/components/responses/serviceUnavailable'`
-
-<br>
-
-### GET /api/v1/practices/{practiceId}/invoice-samples
-
-  * **Summary:** Retrieves a list of invoice samples.
-  * **Tags:** `Practices`
-  * **Security:** `jwtToken`
-
-**Parameters:**
-
-  * `practiceId` (path, required, `string: uuid`, max-length: 50)
-
-**Responses:**
-
-  * **`200 OK`**: OK
-      * **Content:** `application/json`
-      * **Schema:** `string: binary`
-  * **`400`**: `$ref: '#/components/responses/badRequest'`
-  * **`401`**: `$ref: '#/components/responses/unauthorized'`
-  * **`403`**: `$ref: '#/components/responses/forbidden'`
-  * **`500`**: `$ref: '#/components/responses/internalServerError'`
-  * **`503`**: `$ref: '#/components/responses/serviceUnavailable'`
-
-<br>
-
-### PATCH /api/v1/users/{email}/productData
-
-  * **Summary:** Updates user's product-related data
-  * **Tags:** `Users`
-  * **Security:** `jwtToken`
-
-**Parameters:**
-
-  * `email` (path, required, `string: email`): The email of the user
+  * **Summary:** Subscribe to webhook
+  * **Operation ID:** `subscribe`
+  * **Tags:** `WebHooks`
+  * **Security:** `jwtToken`, `apiKey`
 
 **Request Body (Required):**
 
-  * **Description:** List of JsonPatchOperations to perform on a document
   * **Content:** `application/json`
-  * **Schema:** `$ref: '#/components/schemas/jsonPatchOperationList'`
+  * **Schema:** `$ref: '#/components/schemas/webHookParameters'`
 
 **Responses:**
 
-  * **`200 OK`**: Onboarded practice have been published.
+  * **`200 OK`**: The subscription successfully established
+      * **Content:** `application/json`
+      * **Schema:** `$ref: '#/components/parameters/webHookId'`
   * **`400`**: `$ref: '#/components/responses/badRequest'`
   * **`401`**: `$ref: '#/components/responses/unauthorized'`
   * **`403`**: `$ref: '#/components/responses/forbidden'`
@@ -146,12 +34,77 @@
 
 <br>
 
-### GET /api/health
+### GET /api/subscriptions/web-hooks
 
-  * **Summary:** Get the health status of the service.
+  * **Summary:** Get list of subscriptions
+  * **Operation ID:** `getSubscriptions`
+  * **Tags:** `WebHooks`
+  * **Security:** `jwtToken`, `apiKey`
+
+**Responses:**
+
+  * **`200 OK`**: List of MGA subscriptions
+      * **Content:** `application/json`
+      * **Schema:** `$ref: '#/components/schemas/webHookOkResponse'`
+  * **`400`**: `$ref: '#/components/responses/badRequest'`
+  * **`401`**: `$ref: '#/components/responses/unauthorized'`
+  * **`403`**: `$ref: '#/components/responses/forbidden'`
+  * **`500`**: `$ref: '#/components/responses/internalServerError'`
+  * **`503`**: `$ref: '#/components/responses/serviceUnavailable'`
+
+<br>
+
+### PATCH /api/subscriptions/web-hooks/{webHookId}
+
+  * **Summary:** Update subscription details
+  * **Operation ID:** `updateSubscription`
+  * **Tags:** `WebHooks`
+  * **Security:** `jwtToken`, `apiKey`
+
+**Parameters:**
+
+  * `$ref: '#/components/parameters/webHookId'`
+
+**Responses:**
+
+  * **`204`**: `$ref: '#/components/responses/noContent'`
+  * **`400`**: `$ref: '#/components/responses/badRequest'`
+  * **`401`**: `$ref: '#/components/responses/unauthorized'`
+  * **`403`**: `$ref: '#/components/responses/forbidden'`
+  * **`404`**: `$ref: '#/components/responses/notFoundError'`
+  * **`500`**: `$ref: '#/components/responses/internalServerError'`
+  * **`503`**: `$ref: '#/components/responses/serviceUnavailable'`
+
+<br>
+
+### DELETE /api/subscriptions/web-hooks/{webHookId}
+
+  * **Summary:** Unsubscribe from web hook event
+  * **Operation ID:** `unsubscribe`
+  * **Tags:** `WebHooks`
+  * **Security:** `jwtToken`, `apiKey`
+
+**Parameters:**
+
+  * `$ref: '#/components/parameters/webHookId'`
+
+**Responses:**
+
+  * **`204`**: `$ref: '#/components/responses/noContent'`
+  * **`401`**: `$ref: '#/components/responses/unauthorized'`
+  * **`403`**: `$ref: '#/components/responses/forbidden'`
+  * **`500`**: `$ref: '#/components/responses/internalServerError'`
+  * **`503`**: `$ref: '#/components/responses/serviceUnavailable'`
+
+<br>
+
+### GET /api/subscriptions/health
+
+  * **Summary:** Get service health status
   * **Operation ID:** `getHealthStatus`
-  * **Description:** Gets the health status of the service.
+  * **Description:** Get detailed service health status
   * **Tags:** `Monitoring`
+  * **Security:** `apiKey`
 
 **Responses:**
 
@@ -164,7 +117,20 @@
           "status": "Healthy"
         }
         ```
-  * **`400`**: `$ref: '#/components/responses/badRequest'`
+  * **`400 Bad Request`**: The service is unhealthy.
+      * **Content:** `application/json`
+      * **Schema:** `$ref: '#/components/schemas/healthResponse'`
+      * **Example:**
+        ```json
+        {
+          "status": "Unhealthy",
+          "errors": [
+            "Value should be specified for the Bulldog userName",
+            "CosmosDb Authentication key is required"
+          ]
+        }
+        ```
+  * **`401`**: `$ref: '#/components/responses/unauthorized'`
   * **`500`**: `$ref: '#/components/responses/internalServerError'`
   * **`503`**: `$ref: '#/components/responses/serviceUnavailable'`
 
@@ -174,6 +140,13 @@
 
 ### Security Schemes
 
+#### apiKey
+
+  * **Type:** `apiKey`
+  * **In:** `header`
+  * **Name:** `api-key`
+  * **Description:** Authentication with an API key.
+
 #### jwtToken
 
   * **Type:** `http`
@@ -181,10 +154,15 @@
   * **Bearer Format:** `JWT`
   * **Description:** Authentication with JWT token.
 
-#### basicAuth
+### Parameters
 
-  * **Type:** `http`
-  * **Scheme:** `basic`
+#### webHookId
+
+  * **Name:** `webHookId`
+  * **In:** `path`
+  * **Required:** `true`
+  * **Description:** The GUID web hook Identifier.
+  * **Schema:** `string`
 
 ### Responses
 
@@ -225,97 +203,35 @@
 
   * **Description:** Service Unavailable - The service is temporarily unavailable due to maintenance or for some other reason. It is recommended to retry the request one minute later.
 
+#### noContent
+
+  * **Description:** NoContent - The server has successfully fulfilled the client's request, but there is no content to return in the response body.
+
 ### Schemas
 
-#### authConfiguration
-
-  * **Type:** `object`
-  * **Properties:**
-      * `domain`: `string` (The Auth0 domain.)
-      * `clientId`: `string` (The Auth0 client ID.)
-      * `audience`: `string` (The Auth0 API audience.)
-
-#### getPracticesOrderByType
+#### eventType
 
   * **Type:** `string`
-  * **Enum:** `[ PracticeName, PracticeOnboardingDate ]`
+  * **Enum:** `[ InvoiceStaged ]`
 
-#### sortOrderType
-
-  * **Type:** `string`
-  * **Enum:** `[ Asc, Desc ]`
-
-#### practice
+#### webHookParameters
 
   * **Type:** `object`
-  * **Required:** `[ practiceInfo ]`
+  * **Required:** `[ eventType, url, headers ]`
   * **Properties:**
-      * `practiceInfo`: `$ref: '#/components/schemas/practiceInfo'`
-      * `isOnboarded`: `boolean`
-      * `vetIds`: `array` (of `string`, nullable)
-      * `isHouseholdResolvingEnabled`: `boolean`
-      * `invoiceMaxCreatedDate`: `string: date-time` (nullable)
-      * `invoiceMaxUpdatedDate`: `string: date-time` (nullable)
-      * `startDateTimeInvoicesLoading`: `string: date-time` (nullable)
-      * `endDateTimeInvoicesLoading`: `string: date-time` (nullable)
-      * `onBoardingDateTime`: `string: date-time` (nullable)
-      * `initialInvoiceCount`: `integer: int64` (nullable)
-      * `initialInvoicesDeviation`: `integer: int64` (nullable)
-      * `isInvoicesLoading`: `boolean` (nullable)
-      * `totalInvoicesForThisYear`: `integer: int32` (nullable)
-      * `totalInvoicesWithHouseholdId`: `integer: int32` (nullable)
-  * **Additional Properties:** `false`
+      * `eventType`: `string`
+      * `url`: `string`
+      * `headers`: `object` (additionalProperties: `string`)
 
-#### practiceInfo
-
-  * **Type:** `object`
-  * **Required:** `[ id ]`
-  * **Properties:**
-      * `id`: `string: uuid`
-      * `name`: `string` (nullable)
-      * `pimsConnectorName`: `string` (nullable)
-      * `demographics`: `$ref: '#/components/schemas/practiceDemographics'`
-  * **Additional Properties:** `false`
-
-#### practiceDemographics
+#### webHookOkResponse
 
   * **Type:** `object`
   * **Properties:**
-      * `address`: `string` (nullable)
-      * `city`: `string` (nullable)
-      * `state`: `string` (nullable)
-      * `postalCode`: `string` (nullable)
-      * `phone`: `string` (nullable)
-      * `email`: `string` (nullable)
-      * `country`: `string` (nullable)
-  * **Additional Properties:** `false`
-
-#### practiceOnboardingParameters
-
-  * **Type:** `object`
-  * **Required:** `[ practiceId, vetIds ]`
-  * **Properties:**
-      * `practiceId`: `string: uuid` (non-nullable, max-length: 50)
-      * `vetIds`: `array` (of `string`, non-nullable)
-  * **Additional Properties:** `false`
-
-#### onboardPracticeResponse
-
-  * **Type:** `object`
-  * **Required:** `[ status ]`
-  * **Properties:**
-      * `status`: `string` (non-nullable)
-  * **Additional Properties:** `false`
-
-#### jsonPatchOperationList
-
-  * **Type:** `array`
-  * **Items:** `object`
-      * **Required:** `[ op, path ]`
-      * **Properties:**
-          * `op`: `string` (Enum: `[ add, remove, replace, move, copy ]`)
-          * `path`: `string`
-          * `value`: (one of: `integer`, `string`, `boolean`, `number`)
+      * `id`: `string`
+      * `mgaName`: `string`
+      * `eventType`: `string`
+      * `url`: `string`
+      * `headers`: `object` (additionalProperties: `string`)
 
 #### healthResponse
 

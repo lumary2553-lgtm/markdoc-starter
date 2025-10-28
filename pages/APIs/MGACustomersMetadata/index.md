@@ -18,7 +18,7 @@
 ### `/api/health`
 
 #### GET
-Gets the health status of the service
+Get service health status
 
 **Tags**: `Monitoring`
 

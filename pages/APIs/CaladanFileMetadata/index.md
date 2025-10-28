@@ -1,31 +1,11 @@
-Here's the YAML file converted to Markdown:
+# OpenAPI: Caladan.FileMetadata (0.5.18)
 
-# Caladan.FileMetadata
+## Tags
 
-**Version:** 0.5.18
-**OpenAPI:** 3.0.3
+* **File Metadata**: Manage file metadata
+* **Monitoring**: Internal monitoring endpoints
 
-REST API service to manage file metadata.
-
-**Contact:**
-
-  * **Name:** GlobalLogic
-  * **URL:** `https://globallogic.com`
-  * **Email:** `andrii.nikolenko@globallogic.com`
-
------
-
-## API Tags
-
-### File Metadata
-
-A set of APIs for managing File Metadata.
-
-### Monitoring
-
-A set of internal APIs for monitoring the service. These APIs can be used by monitoring software to check if the service is healthy.
-
------
+---
 
 ## Paths
 
@@ -80,9 +60,9 @@ A set of internal APIs for monitoring the service. These APIs can be used by mon
 
 ### GET /api/file-metadata/health
 
-  * **Summary:** Get the health status of the service.
+  * **Summary:** Get service health status
   * **Operation ID:** `getHealthStatus`
-  * **Description:** Gets the health status of the service.
+  * **Description:** Get detailed service health status
   * **Tags:** `Monitoring`
   * **Security:** `apiKey`
 

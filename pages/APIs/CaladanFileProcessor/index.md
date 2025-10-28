@@ -1,31 +1,11 @@
-Here is the YAML file converted to Markdown format.
+# OpenAPI: Caladan.FileProcessor (0.5.18)
 
-# Caladan.FileProcessor
+## Tags
 
-**Version:** 0.5.18
-**OpenAPI:** 3.0.3
+* **File Processor**: Extract invoice information
+* **Monitoring**: Internal monitoring endpoints
 
-REST API service to extract invoice information.
-
-**Contact:**
-
-  * **Name:** GlobalLogic
-  * **URL:** `https://globallogic.com`
-  * **Email:** `andrii.nikolenko@globallogic.com`
-
------
-
-## API Tags
-
-### File Processor
-
-A set of APIs for extract invoice information from the file.
-
-### Monitoring
-
-A set of internal APIs for monitoring the service. These APIs can be used by monitoring software to check if the service is healthy.
-
------
+---
 
 ## Paths
 
@@ -81,9 +61,9 @@ A set of internal APIs for monitoring the service. These APIs can be used by mon
 
 ### GET /api/file-processor/health
 
-  * **Summary:** Get the health status of the service.
+  * **Summary:** Get service health status
   * **Operation ID:** `getHealthStatus`
-  * **Description:** Gets the health status of the service.
+  * **Description:** Get detailed service health status
   * **Tags:** `Monitoring`
   * **Security:** `apiKey`
 
