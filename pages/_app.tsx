@@ -8,8 +8,8 @@ import 'prismjs';
 // Import other Prism themes here
 import 'prismjs/components/prism-bash.min';
 import 'prismjs/themes/prism.css';
-
 import '../public/globals.css'
+import '../public/github-markdown.css'
 
 import type { AppProps } from 'next/app'
 import type { MarkdocNextJsPageProps } from '@markdoc/next.js'
@@ -72,11 +72,11 @@ export default function MyApp({ Component, pageProps }: AppProps<MyAppProps>) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <TopNav>
-        <Link href="/docs">Docs</Link>
+          <Link href="/docs">Docs</Link>
       </TopNav>
-      <div className="page">
+      <div className="page markdown-body">
         <SideNav />
-        <main className="flex column">
+        <main className="flex column markdown-body">
           <Component {...pageProps} />
         </main>
         <TableOfContents toc={toc} />
